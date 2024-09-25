@@ -5,13 +5,14 @@
         <div class="register-form mx-auto">
           <h2 class="register-header">Đăng ký</h2>
           <div class="form-group">
-            <label for="phoneNumber">Email/Phone</label>
+            <label for="phone">Phone</label>
             <input
               type="text"
               class="form-control"
               name="phone"
               required
-              id="phoneNumber"
+              [(ngModel)]="phone"
+              (input)="onPhoneChange()"
             />
             <div class="divider-nospace"></div>
           </div>
@@ -26,7 +27,7 @@
               placeholder="Ít nhất 3 ký tự"
               required
               class="form-control"
-              id="password"
+              [(ngModel)]="password"
             />
             <i class="password-toggle fas fa-eye-slash"></i>
             <div class="divider-nospace"></div>
@@ -42,7 +43,7 @@
               name="retypePassword"
               required
               class="form-control"
-              id="retype-password"
+              [(ngModel)]="retypePassword"
             />
             <i class="password-toggle fas fa-eye-slash"></i>
             <div class="divider-nospace"></div>
@@ -57,7 +58,19 @@
               name="fullName"
               class="form-control"
               required
-              id="full-name"
+              [(ngModel)]="fullName"
+            />
+            <div class="divider-nospace"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="date-of-birth">Ngày tháng năm sinh</label>
+            <input
+              type="date"
+              class="form-control"
+              name="dateOfBirth"
+              [(ngModel)]="dateOfBirth"
+              required
             />
             <div class="divider-nospace"></div>
           </div>
@@ -70,7 +83,7 @@
               type="text"
               name="address"
               class="form-control"
-              id="address"
+              [(ngModel)]="address"
             />
             <div class="divider-nospace"></div>
           </div>
@@ -82,7 +95,7 @@
                   type="checkbox"
                   name="isAccepted"
                   class="form-check-input"
-                  id="agree"
+                  [(ngModel)]="isAccepted"
                 />
                 <label class="form-check-label text-start" for="agree">
                   Tôi đồng ý với các điều khoản và điều kiện</label
@@ -91,10 +104,12 @@
             </div>
           </div>
 
-          <button type="button" class="register-button">Đăng ký</button>
+          <button type="button" class="register-button" (click)="register()">
+            Đăng ký
+          </button>
 
           <div class="divider"></div>
-          
+
           <p class="text-center">
             Bạn đã có tài khoản?
             <span> <a href="#" class="register-link">Đăng nhập</a></span>
