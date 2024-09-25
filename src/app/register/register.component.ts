@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,7 +18,7 @@ export class RegisterComponent {
   dateOfBirth: Date;
   isAccepted: boolean;
 
-  constructor() {
+  constructor(private http: HttpClient, private router: Router) {
     this.phone = '';
     this.password = '';
     this.retypePassword = '';
@@ -32,14 +34,39 @@ export class RegisterComponent {
   }
 
   register() {
-    const message =
-      `phone: ${this.phone}` +
-      `password: ${this.password}` +
-      `retypePassword: ${this.retypePassword}` +
-      `address: ${this.address}` +
-      `fullName: ${this.fullName}` +
-      `isAccepted: ${this.isAccepted}`;
-    alert(message);
+    const apiURL = 'http://localhost:8088/api/v1/users/register';
+    const registerData = {
+      fullname: this.fullName,
+      phone_number: this.phone,
+      address: this.address,
+      password: this.password,
+      retype_password: this.retypePassword,
+      date_of_birth: this.dateOfBirth,
+      facebook_account_id: 0,
+      google_account_id: 0,
+      role_id: 1,
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    this.http.post(apiURL, registerData, { headers }).subscribe({
+      next: (response: any) => {
+        debugger;
+
+        // xử lý kết quả trả về khi đăng kí thành công
+        this.router.navigate(['/login']);
+      },
+      complete() {
+        debugger;
+      },
+      error: (error: any) => {
+        // xử lý lỗi nếu có
+        debugger;
+        alert(`Không thể đăng kí, ${error.error}`);
+      },
+    });
   }
 
   //check password match

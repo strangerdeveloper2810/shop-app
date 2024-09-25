@@ -65,9 +65,11 @@
             <p
               class="text-danger"
               *ngIf="
+                registerForm.form.controls['retypePassword'] &&
                 registerForm.form.controls['retypePassword'].hasError(
                   'passwordMismatch'
-                ) && registerForm.form.touched
+                ) &&
+                registerForm.form.touched
               "
             >
               Mật khẩu không khớp
@@ -102,9 +104,11 @@
             <p
               class="text-danger"
               *ngIf="
+                registerForm.form.controls['dateOfBirth'] &&
                 registerForm.form.controls['dateOfBirth'].hasError(
                   'invalidAge'
-                ) && registerForm.form.touched
+                ) &&
+                registerForm.form.touched
               "
             >
               Bạn chưa đủ 18 tuổi
