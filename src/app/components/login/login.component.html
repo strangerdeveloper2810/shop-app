@@ -46,12 +46,14 @@
           <div class="form-group">
             <div class="form-check checkbox-text">
               <span style="display: flex">
-                <input type="checkbox" class="form-check-input" id="remember" />
-                <label
-                  class="form-check-label text-start"
-                  for="remember"
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="remember"
+                  name="rememberMe"
                   [(ngModel)]="rememberMe"
-                >
+                />
+                <label class="form-check-label text-start" for="remember">
                   Ghi nhớ đăng nhập</label
                 >
               </span>
@@ -62,6 +64,7 @@
           <div class="form-group">
             <select
               class="form-control access-right"
+              name="role"
               [(ngModel)]="selectedRole"
             >
               <option selected disabled>Quyền đăng nhập</option>
