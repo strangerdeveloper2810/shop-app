@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginDTO } from 'src/app/dtos/user/login.dtos';
 import { RegisterDTO } from 'src/app/dtos/user/register.dto';
 import { environments } from 'src/app/environments';
+import { HttpUtilService } from './http.util.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,16 +16,13 @@ export class UserService {
   };
 
   private apiConfig = {
-    headers: this.createHeaders(),
+    headers: this.httpUtilService.createHeaders(),
   };
 
-  constructor(private htttp: HttpClient) {}
-  private createHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept-Language': 'vi',
-    });
-  }
+  constructor(
+    private htttp: HttpClient,
+    private httpUtilService: HttpUtilService
+  ) {}
 
   register(registerDTO: RegisterDTO): Observable<any> {
     return this.htttp.post(this.apiAuth.register, registerDTO, this.apiConfig);
